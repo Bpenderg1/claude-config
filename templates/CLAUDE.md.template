@@ -1,0 +1,109 @@
+# Project: {{PROJECT_NAME}}
+
+## SME Prototype Standards Compliance
+
+This is an SME prototype built for potential production handoff to Software Engineering.
+
+---
+
+## Architecture Rules
+
+### File Organization
+- Routes/pages: `/app`
+- Server endpoints: `/app/api/*`
+- Shared logic: `/lib`
+- Integrations: `/lib/services`
+- Configuration: `/lib/config.ts`
+- Types: `/lib/types.ts`
+
+### Non-Negotiable Standards
+
+1. **No secrets in browser code**
+   - ALL external API calls (SharePoint, Graph, internal APIs) go through `/app/api/*` route handlers
+   - NEVER expose API keys, tokens, or credentials to client-side code
+
+2. **Swappable integrations**
+   - Every integration MUST have both `realService.ts` and `mockService.ts`
+   - Switch implementations via DEMO_MODE environment variable
+
+3. **Demo mode always works**
+   - DEMO_MODE=true must work without any external dependencies
+   - Use deterministic mock data (same inputs = same outputs)
+
+4. **Consistent API responses**
+   ```typescript
+   // Success
+   { ok: true, data: T }
+   // Error
+   { ok: false, error: { code: string, message: string } }
+   ```
+
+5. **Typed everything**
+   - Define all domain objects in `/lib/types.ts`
+   - Use TypeScript strictly
+
+---
+
+## Before Making Any Change
+
+Ask yourself:
+1. Does this match an existing pattern in the codebase?
+2. Could this introduce a security vulnerability?
+3. Will this work in DEMO_MODE=true?
+4. Is this the simplest solution that works?
+5. Does this need a test?
+
+---
+
+## Test Requirements
+
+- Every new feature needs at least one test
+- Write tests BEFORE implementation when possible (TDD)
+- Tests must pass in demo mode without external services
+- NEVER modify test assertions just to make tests pass - fix the implementation
+
+---
+
+## Authentication (For Future)
+
+Currently stubbed - structure for later Azure AD integration:
+- `getCurrentUser()` - returns stub user in demo mode
+- `authorize(role)` - always returns true in demo mode
+- Do NOT hard-code user identities in business logic
+
+---
+
+## When Stuck
+
+1. Search the codebase for similar patterns first
+2. Check `/docs/decisions/` for prior architectural choices
+3. Ask me to clarify requirements before guessing
+4. Default to simpler solutions
+
+---
+
+## Permission Decisions
+
+Before any permission-requiring action, provide:
+1. What action and why
+2. Risk level (Low/Medium/High)
+3. What "always allow" would mean
+4. Your recommendation
+
+---
+
+## Project-Specific Notes
+
+### Technology Stack
+- Next.js 14+ with App Router
+- TypeScript
+- {{ADDITIONAL_TECH}}
+
+### Integrations
+{{INTEGRATIONS_LIST}}
+
+### Key Decisions Made
+{{DECISIONS_LOG}}
+
+### Lessons Learned
+{{LESSONS_LEARNED}}

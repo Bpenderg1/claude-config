@@ -1,0 +1,64 @@
+{
+  "$schema": "https://docs.anthropic.com/claude-code/settings-schema.json",
+  "description": "SME Prototype development settings - optimized for safety and clarity",
+
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "npm run build",
+      "npm run dev",
+      "npm run test",
+      "npm run lint",
+      "npm run type-check",
+      "npx tsc --noEmit",
+      "git status",
+      "git diff",
+      "git log",
+      "git branch",
+      "ls",
+      "pwd",
+      "cat package.json",
+      "cat tsconfig.json"
+    ],
+    "deny": [
+      "rm -rf /",
+      "rm -rf ~",
+      "rm -rf .",
+      "DROP TABLE",
+      "DROP DATABASE",
+      "DELETE FROM",
+      "TRUNCATE",
+      "curl * | bash",
+      "wget * | bash",
+      "chmod 777",
+      "sudo rm",
+      ".env.local",
+      ".env.production",
+      "credentials.json",
+      "secrets",
+      "private_key",
+      "client_secret"
+    ],
+    "ask": [
+      "Write",
+      "Edit",
+      "MultiEdit",
+      "git commit",
+      "git push",
+      "git checkout",
+      "git merge",
+      "npm install",
+      "npx",
+      "Bash"
+    ]
+  },
+
+  "model": {
+    "default": "claude-sonnet-4-20250514",
+    "planning": "claude-sonnet-4-20250514",
+    "review": "claude-sonnet-4-20250514",
+    "quick_tasks": "claude-3-5-haiku-20241022"
+  }
+}
