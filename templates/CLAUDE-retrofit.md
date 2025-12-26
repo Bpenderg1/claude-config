@@ -62,13 +62,18 @@ When reviewing code for this project, **automatically reject** recommendations t
 
 ## Resume Context
 
-When resuming work, here's what you need to know:
+**Last Session**: [DATE]
 
-### Recent Work
-[Update this when pausing work]
+### What Was Completed
+-
+
+### Current State
+-
 
 ### Next Steps
-[What needs to happen next]
+-
 
-### Open Questions
-[Anything unresolved]
+### Open Questions / Blockers
+-
+
+*Update this section before ending each session. Replace contents, don't append.*
