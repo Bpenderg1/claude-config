@@ -92,6 +92,33 @@ Before any permission-requiring action, provide:
 
 ---
 
+## Review Guidelines
+
+When reviewing code for this SME prototype, **automatically reject** recommendations that conflict with these architectural decisions:
+
+### Protected Patterns (Do Not Change)
+
+| Pattern | Reject Recommendations To... | Why It's Protected |
+|---------|------------------------------|-------------------|
+| API route layer (`/app/api/*`) | Skip API routes, call services directly from components, use Server Actions instead of API calls | Creates consistent interface for SWE handoff; same pattern works for all consumers |
+| Service abstraction (`lib/services`) | Inline database/API calls directly in routes | Enables mock/real swapping via DEMO_MODE |
+| Consistent response format | Use different error handling patterns | SWE expects `{ok, data/error}` everywhere |
+
+### Review Recommendations to Accept
+
+- ✅ Fewer component files / less indirection
+- ✅ Better error handling and type safety
+- ✅ Loading states and user feedback
+- ✅ Simpler implementations that preserve the protected patterns
+
+### Example Conflict Resolution
+
+**Reviewer says:** "Use Server Actions and call services directly - no need for API routes"
+
+**Correct response:** "Reject. The API route layer is a protected pattern for SWE handoff. Accept the simplification of fewer component files instead."
+
+---
+
 ## Project-Specific Notes
 
 ### Technology Stack
